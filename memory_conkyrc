@@ -1,0 +1,61 @@
+conky.config = {
+	background = false,
+	update_interval = 1,
+
+	cpu_avg_samples = 2,
+	net_avg_samples = 2,
+	temperature_unit = 'celsius',
+
+	double_buffer = true,
+	no_buffers = true,
+	text_buffer_size = 32768,
+	out_to_console = false,
+
+	gap_x = 323,
+	gap_y = 40,
+	minimum_width = 300, minimum_height = 0,
+	maximum_width = 300,
+	own_window = true,
+	own_window_class = 'conky',
+	own_window_argb_visual = true,
+	own_window_argb_value = 120,
+	own_window_hints = 'undecorated,below,sticky,skip_taskbar,skip_pager',
+	own_window_colour = '#000000',
+	background = false,
+	border_inner_margin = 5,
+	border_outer_margin = 0,
+	alignment = 'top_right',
+
+	draw_shades = false,
+	draw_outline = false,
+	draw_borders = false,
+	draw_graph_borders = false,
+
+	override_utf8_locale = true,
+	use_xft = true,
+	font = 'DejaVu Sans:size=10',
+	xftalpha = 0.5,
+	uppercase = false,
+
+	default_color = 'white',
+        color1 = 'orange',
+        color2 = 'green',
+
+};
+
+conky.text = [[
+${font sans-serif:bold:size=11}MEMORY ${hr 2}
+${goto 10}${font StyleBats:size=12}g${font}   RAM:      $mem / $memmax ($memperc%)
+${goto 5}${color1}${membar}${color}
+${goto 10}${font StyleBats:size=12}g${font}   SWAP:     $swap / $swapmax ($swapperc%)
+${goto 5}${color1}${swapbar}${color}
+${voffset -7}
+${color1}${font StyleBats:size=12}l${font} GPU: ${color #FCAF3E}${exec nvidia-smi --query-gpu=gpu_name --format=csv,noheader,nounits} $color ${alignr} Drivers:   ${exec nvidia-settings -t -q [gpu:0]/NvidiaDriverVersion}
+${color1}CUDA Cores: ${color} ${exec nvidia-settings -t -q [gpu:0]/CUDACores}
+${color1}Monitor Refersh Rate: ${color} ${exec nvidia-settings -t -q [gpu:0]/RefreshRate}
+${color1}GPU Temperature ${color}  ${exec nvidia-settings -t -q [gpu:0]/GPUCoreTemp} °C
+${color1}GPU Utilization ${color}  ${nvidia gpuutil} %
+${color1}VRAM Utilization ${color} ${nvidia membwutil} %
+${color1}VRAM Utilization ${color} ${nvidia gpufreq}
+${color1}GPU Power Draw ${color} ${exec nvidia-smi | grep % | cut -c 21-23} W
+]];

@@ -1,0 +1,62 @@
+conky.config = {
+	background = false,
+	update_interval = 1,
+
+	cpu_avg_samples = 2,
+	net_avg_samples = 2,
+	temperature_unit = 'celsius',
+
+	double_buffer = true,
+	no_buffers = true,
+	text_buffer_size = 32768,
+	out_to_console = false,
+
+	gap_x = 323,
+	gap_y = 67,
+	minimum_width = 300, minimum_height = 0,
+	maximum_width = 300,
+	own_window = true,
+	own_window_class = 'conky',
+	own_window_argb_visual = true,
+	own_window_argb_value = 120,
+	own_window_hints = 'undecorated,below,sticky,skip_taskbar,skip_pager',
+	own_window_colour = '#000000',
+	background = false,
+	border_inner_margin = 5,
+	border_outer_margin = 0,
+	alignment = 'middle_right',
+
+	draw_shades = false,
+	draw_outline = false,
+	draw_borders = false,
+	draw_graph_borders = false,
+
+	override_utf8_locale = true,
+	use_xft = true,
+	font = 'DejaVu Sans:size=10',
+	xftalpha = 0.5,
+	uppercase = false,
+
+	default_color = 'white',
+        color1 = 'red',
+        color2 = 'green',
+
+};
+
+conky.text = [[
+${voffset -15}
+${font sans-serif:bold:size=11}CPU ${hr 2}
+${font sans-serif:normal:size=8}${execi 1000 grep model /proc/cpuinfo | cut -d : -f2 | tail -1 | sed 's/\s//'}
+#${alignc}${color2}${cpugauge cpuavg 97,300}${color} 
+${cpugraph cpuavg 50,300 FC354C 0ABFBC}
+${voffset -7}
+${goto 10}${font StyleBats:size=12}A${font}   CPU1: ${cpu cpu 0}%${goto 120}${execi 5 sensors|grep 'Core 0'| awk -F'+' '{print $2}' | awk -F'.' '{print $1}'} °C ${alignr}${freq 1} MHz
+${goto 5}${cpugraph cpu0 FC354C 0ABFBC}
+${goto 10}${font StyleBats:size=12}A${font}   CPU2: ${cpu cpu 1}%${goto 120}${execi 5 sensors|grep 'Core 1'| awk -F'+' '{print $2}' | awk -F'.' '{print $1}'} °C ${alignr}${freq 2} MHz
+${goto 5}${cpugraph cpu1 FC354C 0ABFBC}
+${goto 10}${font StyleBats:size=12}A${font}   CPU3: ${cpu cpu 2}%${goto 120}${execi 5 sensors|grep 'Core 2'| awk -F'+' '{print $2}' | awk -F'.' '{print $1}'} °C ${alignr}${freq 3} MHz
+${goto 5}${cpugraph cpu2 FC354C 0ABFBC}
+${goto 10}${font StyleBats:size=12}A${font}   CPU4: ${cpu cpu 3}%${goto 120}${execi 5 sensors|grep 'Core 3'| awk -F'+' '{print $2}' | awk -F'.' '{print $1}'} °C ${alignr}${freq 4} MHz
+${goto 5}${cpugraph cpu3 FC354C 0ABFBC}
+
+]];

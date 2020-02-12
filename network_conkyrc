@@ -1,0 +1,79 @@
+conky.config = {
+	background = false,
+	update_interval = 1,
+
+	cpu_avg_samples = 2,
+	net_avg_samples = 2,
+	temperature_unit = 'celsius',
+
+	double_buffer = true,
+	no_buffers = true,
+	text_buffer_size = 32768,
+	out_to_console = false,
+
+	gap_x = -171,
+	gap_y = 00,
+	minimum_width = 300, minimum_height = 0,
+	maximum_width = 300,
+	own_window = true,
+	own_window_class = 'conky',
+	own_window_argb_visual = true,
+	own_window_argb_value = 120,
+	own_window_hints = 'undecorated,below,sticky,skip_taskbar,skip_pager',
+	own_window_colour = '#000000',
+	background = false,
+	border_inner_margin = 5,
+	border_outer_margin = 0,
+	alignment = 'top_middle',
+
+	draw_shades = false,
+	draw_outline = false,
+	draw_borders = false,
+	draw_graph_borders = false,
+
+	override_utf8_locale = true,
+	use_xft = true,
+	font = 'DejaVu Sans:size=10',
+	xftalpha = 0.5,
+	uppercase = false,
+
+	default_color = 'white',
+        color1 = 'red',
+        color2 = 'green',
+
+};
+
+conky.text = [[
+${font Ubuntu:bold:size=11}NETWORK ${hr 1}
+${goto 10}${voffset 4}${font PizzaDude Bullets:size=11}Public Ip:${font} ${alignr} ${exec curl ipinfo.io/ip}
+${goto 10}${voffset 4}${font PizzaDude Bullets:size=12}WiFi${font}   Local Ip: ${alignr}${addr wlp4s0}
+${font sans-serif:normal:size=8}Down: ${downspeed wlp4s0}  ${alignr}Up: ${upspeed wlp4s0} 
+${color lightgray}${downspeedgraph wlp4s0 80,140} ${alignr}${upspeedgraph wlp4s0 80,140}$color
+${goto 10}${voffset 4}${font PizzaDude Bullets:size=12}ETHERNET${font}   Local Ip: ${alignr}${addr enp3s0f0}
+${goto 10}${voffset 4}${font PizzaDude Bullets:size=12}${font}   Uploaded: ${alignr}${totalup enp3s0f0}
+${goto 10}${voffset 4}${font PizzaDude Bullets:size=12}${font}   Downloaded: ${alignr}${totaldown enp3s0f0}
+${font sans-serif:normal:size=8}Down: ${downspeed enp3s0f0}  ${alignr}Up: ${upspeed enp3s0f0} 
+${color lightgray}${downspeedgraph enp3s0f0 80,140 ff0000 0000ff} ${alignr}${upspeedgraph enp3s0f0 80,140 1783B4 FFFFFF}$color${font}
+${voffset -7}
+${goto 5}${color2}Inbound Connect:  ${color white}${tcp_portmon 1 32767 count}${color2}${alignr}Service/Port
+${goto 5}${font Bitstream Vera Sans Mono:size=7.5}${color white}${tcp_portmon 1 32767 rhost 0} ${alignr} ${tcp_portmon 1 32767 lservice 0}
+${goto 5}${tcp_portmon 1 32767 rhost 1} ${alignr} ${tcp_portmon 1 32767 lservice 1}
+${goto 5}${tcp_portmon 1 32767 rhost 2} ${alignr} ${tcp_portmon 1 32767 lservice 2}
+${goto 5}${tcp_portmon 1 32767 rhost 3} ${alignr} ${tcp_portmon 1 32767 lservice 3}
+${goto 5}${tcp_portmon 1 32767 rhost 4} ${alignr} ${tcp_portmon 1 32767 lservice 4}${font}
+${voffset -7}
+${goto 5}${color2}Outbound Connect:  ${color white}${tcp_portmon 32768 61000 count}${color2}${alignr}Service/Port
+${goto 5}${font Bitstream Vera Sans Mono:size=7.5}${color white}${tcp_portmon 32768 61000 rhost 0} ${alignr} ${tcp_portmon 32768 61000 rservice 0}
+${goto 5}${tcp_portmon 32768 61000 rhost 1} ${alignr} ${tcp_portmon 32768 61000 rservice 1}
+${goto 5}${tcp_portmon 32768 61000 rhost 2} ${alignr} ${tcp_portmon 32768 61000 rservice 2}
+${goto 5}${tcp_portmon 32768 61000 rhost 3} ${alignr} ${tcp_portmon 32768 61000 rservice 3}
+${goto 5}${tcp_portmon 32768 61000 rhost 4} ${alignr} ${tcp_portmon 32768 61000 rservice 4}
+${goto 5}${tcp_portmon 32768 61000 rhost 5} ${alignr} ${tcp_portmon 32768 61000 rservice 5}
+${goto 5}${tcp_portmon 32768 61000 rhost 6} ${alignr} ${tcp_portmon 32768 61000 rservice 6}
+${goto 5}${tcp_portmon 32768 61000 rhost 7} ${alignr} ${tcp_portmon 32768 61000 rservice 7}
+${goto 5}${tcp_portmon 32768 61000 rhost 8} ${alignr} ${tcp_portmon 32768 61000 rservice 8}
+${goto 5}${tcp_portmon 32768 61000 rhost 9} ${alignr} ${tcp_portmon 32768 61000 rservice 9}
+${goto 5}${tcp_portmon 32768 61000 rhost 10} ${alignr} ${tcp_portmon 32768 61000 rservice 10}
+${goto 5}${tcp_portmon 32768 61000 rhost 11} ${alignr} ${tcp_portmon 32768 61000 rservice 11}
+
+]];
